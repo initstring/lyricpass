@@ -1,6 +1,7 @@
 import argparse
 from bs4 import BeautifulSoup
 import requests
+import sys
 
 
 # Creating a class for the parser to gracefully handle errors:
@@ -16,6 +17,7 @@ parser = MyParser()
 parser.add_argument("artist", type=str, help="Define a specific artist for song lyric inclusion. Please  place \
                                                the artist name in quotes.", action="store")
 parser.add_argument("output", type=str, help="Output to file name in current directory.", action="store")
+parser.add_argument("--lower", help="Switches all letters to lower case.", action='store_true')
 args = parser.parse_args()
 
 artist = args.artist
@@ -50,18 +52,19 @@ def get_lyrics(songurl):
     response = requests.get(songurl)
     soup = BeautifulSoup(response.content, "html.parser")
     lyricbox = soup.find('div', {'class': 'lyricbox'})
-    try:
+    if lyricbox:
         for line in lyricbox:
             if line and '<' not in str(line) and '\' not in str(line)':
                 l.append(str(line))
-    except:
-        return
     return l
 
 
 def format_lyrics(rawlyrics):
-    cleanlyrics = rawlyrics
-    return cleanlyrics
+    if args.lower:
+        formatted = [element.lower() for element in rawlyrics]
+    else:
+        formatted = rawlyrics
+    return formatted
 
 
 def write_file(l, o):
@@ -80,12 +83,12 @@ def main():
     songlinks = get_songs(artisturl, artist)
     for s in songlinks:
         print("Getting lyrics for " + s)
-        lyrics.append(get_lyrics(s))
+        for l in get_lyrics(s):
+            lyrics.append(l)
     lyrics = format_lyrics(lyrics)
     print("*********************")
     print("Now writing output file...")
-    for song in lyrics:
-        write_file(song, outfile)
+    write_file(lyrics, outfile)
 
 
 

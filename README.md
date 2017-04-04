@@ -1,11 +1,20 @@
 # lyricpass
 Generates password lists with song lyrics based on a given artist
 
-Usage:
-python lyricpass.py \<artist name\> \<output file\>
+usage: lyricpass.py [-h] [--lower] artist output
 
-Example:
+positional arguments:
+  artist      Define a specific artist for song lyric inclusion. Please place
+              the artist name in quotes.
+  output      Output to file name in current directory.
+
+optional arguments:
+  -h, --help  show this help message and exit
+  --lower     Switches all letters to lower case.
+
+Examples:
 python lyricpass.py "Rob Zombie" zombie-pass.txt
+python lyricpass.py --lower "Stone Temple Pilots" stp.txt
 
 # Overview
 People are being encouraged to user longer passwords - specifically multiple words stringed together.
@@ -16,5 +25,5 @@ find the target's favorite artist (easy enough to do with social media).
 
 # To Do
 This is just a very early POC. I still need to work on error checking. I also plan to do the following:
-- Provide options for case conversion (keep all lower case, upper case first words, etc
 - Provide options for punctuation removal
+- Provide function to further split lines including a comma (as this could be a logical break)
