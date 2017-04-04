@@ -1,7 +1,7 @@
 # lyricpass
 Generates password lists with song lyrics based on a given artist
 
-usage: lyricpass.py [-h] [--lower] artist output
+usage: lyricpass.py [-h] [--lower] [--punctuation] artist output
 
 positional arguments: <Br>
 &nbsp;&nbsp;&nbsp;&nbsp;artist:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Define a specific artist for song lyric inclusion. Use quotes.<br>
