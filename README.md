@@ -3,14 +3,13 @@ Generates password lists with song lyrics based on a given artist
 
 usage: lyricpass.py [-h] [--lower] artist output
 
-positional arguments:
-  artist      Define a specific artist for song lyric inclusion. Please place
-              the artist name in quotes.
-  output      Output to file name in current directory.
+positional arguments: <Br>
+&nbsp;&nbsp;&nbsp;&nbsp;artist:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Define a specific artist for song lyric inclusion. Use quotes.
+&nbsp;&nbsp;&nbsp;&nbsp;output&nbsp;&nbsp;&nbsp;&nbsp;Output to file name in current directory.
 
 optional arguments:
-  -h, --help  show this help message and exit
-  --lower     Switches all letters to lower case.
+&nbsp;&nbsp;&nbsp;&nbsp;-h,&nbsp;&nbsp;&nbsp;&nbsp;--help  show this help message and exit
+&nbsp;&nbsp;&nbsp;&nbsp;--lower&nbsp;&nbsp;&nbsp;&nbsp;Switches all letters to lower case.
 
 Examples:
 python lyricpass.py "Rob Zombie" zombie-pass.txt
