@@ -15,7 +15,7 @@ class MyParser(argparse.ArgumentParser):
 # Handle the arguments before executing the main functions:
 parser = MyParser()
 parser.add_argument("artist", type=str, help="Define a specific artist for song lyric inclusion. Please  place \
-                                               the artist name in quotes.", action="store")
+                     the artist name in quotes.", action="store")
 parser.add_argument("output", type=str, help="Output to file name in current directory.", action="store")
 parser.add_argument("--lower", help="Switches all letters to lower case.", action='store_true')
 args = parser.parse_args()
