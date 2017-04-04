@@ -2,7 +2,7 @@
 Generates password lists with song lyrics based on a given artist
 
 Usage:
-python lyricpass.py <artist name> <output file>
+python lyricpass.py \<artist name\> \<output file\>
 
 Example:
 python lyricpass.py "Rob Zombie" zombie-pass.txt
