@@ -1,5 +1,4 @@
 import argparse
-from PyLyrics import *
 from bs4 import BeautifulSoup
 import requests
 
