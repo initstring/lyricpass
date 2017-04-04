@@ -53,9 +53,12 @@ def get_lyrics(songurl):
     soup = BeautifulSoup(response.content, "html.parser")
     lyricbox = soup.find('div', {'class': 'lyricbox'})
     if lyricbox:
-        for line in lyricbox:
-            if line and '<' not in str(line) and '\' not in str(line)':
-                l.append(str(line))
+        try:
+            for line in lyricbox:
+                if line and '<' not in str(line) and '\' not in str(line)':
+                    l.append(str(line))
+        except:
+            return
     return l
 
 
@@ -71,7 +74,7 @@ def write_file(l, o):
     file = open(o, 'a')
     try:
         for line in l:
-            file.write(str(line) + '\n')
+            file.write(str(line).encode('utf8') + '\n')
     except:
         return
 
@@ -83,8 +86,11 @@ def main():
     songlinks = get_songs(artisturl, artist)
     for s in songlinks:
         print("Getting lyrics for " + s)
-        for l in get_lyrics(s):
-            lyrics.append(l)
+        try:
+            for l in get_lyrics(s):
+                lyrics.append(l)
+        except:
+            continue
     lyrics = format_lyrics(lyrics)
     print("*********************")
     print("Now writing output file...")
