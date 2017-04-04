@@ -38,16 +38,16 @@ def create_song_url(song, artist):
     return url
 
 
-# This function attempts to create a list of song names based on the artist put in on the command line.
+# This function attempts to create a list of links to songs based on the artist put in on the command line.
 # Later, we will use these song names to go looking for the lyrics:
 def get_songs(artisturl, artist):
     cleanlinks = []
-    response = requests.get(artisturl)
+    response = requests.get(artisturl)                       # We want to scrape the artist's landing page
     soup = BeautifulSoup(response.content, "html.parser")
-    rawlinks = soup.select("ol li b a")
+    rawlinks = soup.select("ol li b a")                      # On that page, find the bulleted song lists
     for l in rawlinks:
-        url = create_song_url(l.text, artist)
-        cleanlinks.append(url)
+        url = create_song_url(l.text, artist)                # Create a new link based on artist and song name
+        cleanlinks.append(url)                               # Stash this song link in a list to return
     return cleanlinks
 
 
@@ -57,11 +57,11 @@ def get_songs(artisturl, artist):
 # and except:
 def get_lyrics(songurl):
     l = []
-    response = requests.get(songurl)
+    response = requests.get(songurl)                            # Now we scrape each individual song page
     soup = BeautifulSoup(response.content, "html.parser")
-    lyricbox = soup.find('div', {'class': 'lyricbox'})
+    lyricbox = soup.find('div', {'class': 'lyricbox'})          # The lyrics are stored in a div tag called lyricbox
     if lyricbox:
-        for line in lyricbox:
+        for line in lyricbox:                                   # Grab the good text out of the lyricbox
             if line and '<' not in str(line) and '\' not in str(line)':
                 try:
                     l.append(str(line))
