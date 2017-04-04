@@ -24,11 +24,13 @@ artist = args.artist
 outfile = args.output
 
 
+# The web site uses underscores in place of spaces. This function will format for us:
 def create_artist_url(a):
     a = a.replace(' ', '_')
     url = 'http://lyrics.wikia.com/wiki/' + a
     return url
 
+# The site has a standard format for URLs. After we find the song names, we can use this to get the URL:
 def create_song_url(song, artist):
     song = song.replace(' ', '_')
     artist = artist.replace(' ', '_')
@@ -36,6 +38,8 @@ def create_song_url(song, artist):
     return url
 
 
+# This function attempts to create a list of song names based on the artist put in on the command line.
+# Later, we will use these song names to go looking for the lyrics:
 def get_songs(artisturl, artist):
     cleanlinks = []
     response = requests.get(artisturl)
@@ -47,21 +51,27 @@ def get_songs(artisturl, artist):
     return cleanlinks
 
 
+# After we know the song names, we can use the artist name and the url function above to go find the actual lyrics.
+# This function does some basic cleaning of HTML tags out of the return strings. I found that unexpected data
+# is occasionally returned and generated errors trying to append to a list, so we will work around that with try
+# and except:
 def get_lyrics(songurl):
     l = []
     response = requests.get(songurl)
     soup = BeautifulSoup(response.content, "html.parser")
     lyricbox = soup.find('div', {'class': 'lyricbox'})
     if lyricbox:
-        try:
-            for line in lyricbox:
-                if line and '<' not in str(line) and '\' not in str(line)':
+        for line in lyricbox:
+            if line and '<' not in str(line) and '\' not in str(line)':
+                try:
                     l.append(str(line))
-        except:
-            return
+                except:
+                    continue
+    print ("Found " + str(len(l)) + " lines of lyrics")
     return l
 
 
+# This function is only has an effect when option parameters are specified, such as output in lowercase:
 def format_lyrics(rawlyrics):
     if args.lower:
         formatted = [element.lower() for element in rawlyrics]
@@ -70,13 +80,14 @@ def format_lyrics(rawlyrics):
     return formatted
 
 
+# This function will append the found lyrics to a file in the current directory:
 def write_file(l, o):
     file = open(o, 'a')
-    try:
-        for line in l:
-            file.write(str(line).encode('utf8') + '\n')
-    except:
-        return
+    for line in l:
+        try:
+            file.write(str(line) + '\n')
+        except:
+            continue
 
 
 def main():
@@ -86,11 +97,11 @@ def main():
     songlinks = get_songs(artisturl, artist)
     for s in songlinks:
         print("Getting lyrics for " + s)
-        try:
-            for l in get_lyrics(s):
+        for l in get_lyrics(s):
+            try:
                 lyrics.append(l)
-        except:
-            continue
+            except:
+                continue
     lyrics = format_lyrics(lyrics)
     print("*********************")
     print("Now writing output file...")
