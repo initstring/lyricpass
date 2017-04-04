@@ -71,7 +71,7 @@ def get_lyrics(songurl):
     return l
 
 
-# This function is only has an effect when option parameters are specified, such as output in lowercase:
+# This function only has an effect when optional parameters are specified, such as output in lowercase:
 def format_lyrics(rawlyrics):
     if args.lower:
         formatted = [element.lower() for element in rawlyrics]
@@ -93,19 +93,20 @@ def write_file(l, o):
 def main():
     lyrics = []
     print('Looking for lyrics from ' + artist + ' and writing to file: ' + outfile)
-    artisturl = create_artist_url(artist)
-    songlinks = get_songs(artisturl, artist)
+
+    artisturl = create_artist_url(artist)               # create a workable URL
+    songlinks = get_songs(artisturl, artist)            # find all the songs for this artist
     for s in songlinks:
         print("Getting lyrics for " + s)
-        for l in get_lyrics(s):
+        for l in get_lyrics(s):                         # get a list of lyric lines
             try:
-                lyrics.append(l)
+                lyrics.append(l)                        # append found lines to master list
             except:
                 continue
-    lyrics = format_lyrics(lyrics)
+    lyrics = format_lyrics(lyrics)                      # format lyrics as specified in arguments
     print("*********************")
     print("Now writing output file...")
-    write_file(lyrics, outfile)
+    write_file(lyrics, outfile)                         # write the output file
 
 
 
