@@ -7,7 +7,7 @@ positional arguments: <Br>
 &nbsp;&nbsp;&nbsp;&nbsp;artist:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Define a specific artist for song lyric inclusion. Use quotes.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;output&nbsp;&nbsp;&nbsp;&nbsp;Output to file name in current directory.
 
-optional arguments:
+optional arguments:<Br>
 &nbsp;&nbsp;&nbsp;&nbsp;-h,&nbsp;&nbsp;&nbsp;&nbsp;--help  show this help message and exit<br>
 &nbsp;&nbsp;&nbsp;&nbsp;--lower&nbsp;&nbsp;&nbsp;&nbsp;Switches all letters to lower case.
 
