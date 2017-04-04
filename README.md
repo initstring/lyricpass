@@ -22,6 +22,8 @@ An obvious choice is to use a song lyric from their favorite artist. This seems 
 The intent of this tool is a POC to prove that this type of password is also insecure, especially if you are able to
 find the target's favorite artist (easy enough to do with social media).
 
+This could be used with the password cracker of your choice for testing the security of your own system via brute force methods. It would also be interesting to run to see if it catches any passwords you yourself are currently using.
+
 # To Do
 This is just a very early POC. I still need to work on error checking. I also plan to do the following:
 - Provide options for punctuation removal
