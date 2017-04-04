@@ -9,7 +9,8 @@ positional arguments: <Br>
 
 optional arguments:<Br>
 &nbsp;&nbsp;&nbsp;&nbsp;-h,&nbsp;&nbsp;&nbsp;&nbsp;--help  show this help message and exit<br>
-&nbsp;&nbsp;&nbsp;&nbsp;--lower&nbsp;&nbsp;&nbsp;&nbsp;Switches all letters to lower case.
+&nbsp;&nbsp;&nbsp;&nbsp;--lower&nbsp;&nbsp;&nbsp;&nbsp;Switches all letters to lower case.<Br>
+&nbsp;&nbsp;&nbsp;&nbsp;--punctuation&nbsp;&nbsp;&nbsp;&nbsp;Preserves the punctuation, which is removed by default
 
 Examples:<Br>
 python lyricpass.py "Rob Zombie" zombie-pass.txt<Br>
@@ -26,5 +27,4 @@ This could be used with the password cracker of your choice for testing the secu
 
 # To Do
 This is just a very early POC. I still need to work on error checking. I also plan to do the following:
-- Provide options for punctuation removal
 - Provide function to further split lines including a comma (as this could be a logical break)

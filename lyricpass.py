@@ -2,6 +2,7 @@ import argparse
 from bs4 import BeautifulSoup
 import requests
 import sys
+import string
 
 
 # Creating a class for the parser to gracefully handle errors:
@@ -18,6 +19,7 @@ parser.add_argument("artist", type=str, help="Define a specific artist for song 
                      the artist name in quotes.", action="store")
 parser.add_argument("output", type=str, help="Output to file name in current directory.", action="store")
 parser.add_argument("--lower", help="Switches all letters to lower case.", action='store_true')
+parser.add_argument("--punctuation", help="Preserves punctuation, which is removed by default.", action='store_true')
 args = parser.parse_args()
 
 artist = args.artist
@@ -64,19 +66,29 @@ def get_lyrics(songurl):
         for line in lyricbox:                                   # Grab the good text out of the lyricbox
             if line and '<' not in str(line) and '\' not in str(line)':
                 try:
-                    l.append(str(line))
+                    l.append(str(line).strip())                 # Clear surrounding whitespace
                 except:
                     continue
     print ("Found " + str(len(l)) + " lines of lyrics")
     return l
 
 
-# This function only has an effect when optional parameters are specified, such as output in lowercase:
+# This function can be used to further deduplicate the list after punctuation is removed.
+def dedupe(seq):
+    seen = set()
+    seen_add = seen.add
+    return [x for x in seq if not (x in seen or seen_add(x))]
+
+
+# This function cleans up the data before writing, including any optional parameters specified at launch:
 def format_lyrics(rawlyrics):
+    formatted = rawlyrics
     if args.lower:
-        formatted = [element.lower() for element in rawlyrics]
-    else:
-        formatted = rawlyrics
+        formatted = [element.lower() for element in formatted]
+    if not args.punctuation:
+        formatted = [''.join(c for c in s if c not in string.punctuation) for s in formatted]
+    formatted = dedupe(formatted)
+
     return formatted
 
 
