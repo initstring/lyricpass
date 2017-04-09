@@ -1,5 +1,5 @@
 # lyricpass
-Generates password lists with song lyrics based on a given artist
+Password wordlist generator using song lyrics for targeted bruteforce audits / attacks. Useful for penetration testing or security research.
 
 usage: lyricpass.py [-h] [--lower] [--punctuation] artist output
 
