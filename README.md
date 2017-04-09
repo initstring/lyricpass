@@ -1,6 +1,6 @@
 # lyricpass
 Password wordlist generator using song lyrics for targeted bruteforce audits / attacks. Useful for penetration testing or security research.
-
+'''
 usage: lyricpass.py [-h] [--lower] [--punctuation] artist output
 
 positional arguments: <Br>
@@ -11,10 +11,10 @@ optional arguments:<Br>
 &nbsp;&nbsp;&nbsp;&nbsp;-h,&nbsp;&nbsp;&nbsp;&nbsp;--help  show this help message and exit<br>
 &nbsp;&nbsp;&nbsp;&nbsp;--lower&nbsp;&nbsp;&nbsp;&nbsp;Switches all letters to lower case.<Br>
 &nbsp;&nbsp;&nbsp;&nbsp;--punctuation&nbsp;&nbsp;&nbsp;&nbsp;Preserves the punctuation, which is removed by default
-
+'''
 Examples:<Br>
-python lyricpass.py "Rob Zombie" zombie-pass.txt<Br>
-python lyricpass.py --lower "Stone Temple Pilots" stp.txt<br>
+'''python lyricpass.py "Rob Zombie" zombie-pass.txt<Br>
+python lyricpass.py --lower "Stone Temple Pilots" stp.txt'''<br>
 
 # Overview
 People are being encouraged to user longer passwords - specifically multiple words stringed together.
