@@ -1,3 +1,5 @@
+<meta name="description" content="Password wordlist generator using song lyrics for targeted bruteforce audits / attacks. Useful for penetration testing or security research." />
+
 # lyricpass
 Password wordlist generator using song lyrics for targeted bruteforce audits / attacks. Useful for penetration testing or security research.
 ```
