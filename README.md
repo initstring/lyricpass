@@ -19,7 +19,7 @@ python lyricpass.py --lower "Stone Temple Pilots" stp.txt
 ```
 
 # Overview
-People are being encouraged to user longer passwords - specifically multiple words stringed together.
+People are being encouraged to use longer passwords - specifically multiple words stringed together.
 An obvious choice is to use a song lyric from their favorite artist. This seems much more secure than a single word.
 
 The intent of this tool is a POC to prove that this type of password is also insecure, especially if you are able to
