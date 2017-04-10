@@ -4,13 +4,13 @@ Password wordlist generator using song lyrics for targeted bruteforce audits / a
 usage: lyricpass.py [-h] [--lower] [--punctuation] artist output
 
 positional arguments:
-&nbsp;&nbsp;&nbsp;&nbsp;artist:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Define a specific artist for song lyric inclusion. Use quotes.
-&nbsp;&nbsp;&nbsp;&nbsp;output&nbsp;&nbsp;&nbsp;&nbsp;Output to file name in current directory.
+    artist:         Define a specific artist for song lyric inclusion. Use quotes.
+    output:         Output to file name in current directory.
 
 optional arguments:
-&nbsp;&nbsp;&nbsp;&nbsp;-h,&nbsp;&nbsp;&nbsp;&nbsp;--help  show this help message and exit
-&nbsp;&nbsp;&nbsp;&nbsp;--lower&nbsp;&nbsp;&nbsp;&nbsp;Switches all letters to lower case.
-&nbsp;&nbsp;&nbsp;&nbsp;--punctuation&nbsp;&nbsp;&nbsp;&nbsp;Preserves the punctuation, which is removed by default
+    -h, --help      show this help message and exit
+    --lower         Switches all letters to lower case.
+    --punctuation   Preserves the punctuation, which is removed by default
 ```
 Examples:<Br>
 ```
