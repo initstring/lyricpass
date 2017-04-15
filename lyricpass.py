@@ -64,9 +64,9 @@ def get_lyrics(songurl):
     lyricbox = soup.find('div', {'class': 'lyricbox'})          # The lyrics are stored in a div tag called lyricbox
     if lyricbox:
         for line in lyricbox:                                   # Grab the good text out of the lyricbox
-            if line and '<' not in str(line) and '\' not in str(line)':
+            if line and '<' not in line.encode('utf8') and '\\' not in line.encode('utf8'):
                 try:
-                    l.append(str(line).strip())                 # Clear surrounding whitespace
+                    l.append(line.encode('utf8').strip())       # Clear surrounding whitespace
                 except:
                     continue
     print ("Found " + str(len(l)) + " lines of lyrics")
