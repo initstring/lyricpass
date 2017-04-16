@@ -1,5 +1,7 @@
 <meta name="description" content="Password wordlist generator using song lyrics for targeted bruteforce audits / attacks. Useful for penetration testing or security research." />
 
+**Note: Currently working with Python 2.7, will update soon to support Python 3+**
+
 # lyricpass
 Password wordlist / dictionary generator using song lyrics for targeted bruteforce audits / attacks. Useful for penetration testing or security research.
 ```
@@ -32,3 +34,4 @@ This could be used with the password cracker of your choice for testing the secu
 # To Do
 This is just a very early POC. I still need to work on error checking. I also plan to do the following:
 - Provide function to further split lines including a comma (as this could be a logical break)
+- Fix for Python 3+ (right now tested good in Python 2.7)
