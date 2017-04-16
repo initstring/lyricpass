@@ -32,3 +32,4 @@ This could be used with the password cracker of your choice for testing the secu
 # To Do
 This is just a very early POC. I still need to work on error checking. I also plan to do the following:
 - Provide function to further split lines including a comma (as this could be a logical break)
+- Fix for Python 3+ (right now tested good in Python 2.7)
