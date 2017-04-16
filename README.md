@@ -1,11 +1,10 @@
 <meta name="description" content="Password wordlist generator using song lyrics for targeted bruteforce audits / attacks. Useful for penetration testing or security research." />
 
+**Currently tested only with Python 2.7 - need to continue fixing for Python 3+**
 
 # lyricpass
 Password wordlist / dictionary generator using song lyrics for targeted bruteforce audits / attacks. Useful for penetration testing or security research.<br>
 Easy to use - you give it an artist, you get back a text file with all of their lyrics to use for cracking passwords.
-
-Tested with Python 2.7, 3.4, 3.5 on MacOS and Linux Mint. Requires bs4, request, sys, string.
 
 
 # Overview
