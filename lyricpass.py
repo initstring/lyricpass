@@ -60,17 +60,18 @@ def get_songs(artisturl, artist):
 def get_lyrics(songurl):
     l = []
     response = requests.get(songurl)                            # Now we scrape each individual song page
-    soup = BeautifulSoup(response.content, "html.parser")
+    soup = BeautifulSoup(response.content, "html.parser")       # Use bs4 to parse the html data
     lyricbox = soup.find('div', {'class': 'lyricbox'})          # The lyrics are stored in a div tag called lyricbox
-    if lyricbox:
-        for line in lyricbox:                                   # Grab the good text out of the lyricbox
-            if line and '<' not in line.encode('utf8') and '\\' not in line.encode('utf8'):
+    if lyricbox:                                                # Verify we find lyrics on the page
+        for line in lyricbox:
+            line.encode('utf8').strip()                         # Encode the data and remove whitespaces
+            if line and '<' not in line and '\\' not in line:   # Hacky way of stripping some non-lyric lines
                 try:
-                    l.append(line.encode('utf8').strip())       # Clear surrounding whitespace
+                    l.append(line)                              # If this is good, clean text: append it to the list
                 except:
                     continue
     print ("Found " + str(len(l)) + " lines of lyrics")
-    return l
+    return l                                                    # This returns a long list of lyrics to the main func
 
 
 # This function can be used to further deduplicate the list after punctuation is removed.
