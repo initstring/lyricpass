@@ -3,8 +3,19 @@
 
 # lyricpass
 Password wordlist / dictionary generator using song lyrics for targeted bruteforce audits / attacks. Useful for penetration testing or security research.
+Easy to use - you give it an artist, you get back a text file with all of their lyrics to use for cracking passwords.
 
 Tested with Python 2.7, 3.4, 3.5 on MacOS and Linux Mint. Requires bs4, request, sys, string.
+
+
+# Overview
+People are being encouraged to use longer passwords - specifically multiple words stringed together.
+An obvious choice is to use a song lyric from their favorite artist. This seems much more secure than a single word.
+
+The intent of this tool is a POC to prove that this type of password is also insecure, especially if you are able to
+find the target's favorite artist (easy enough to do with social media).
+
+This could be used with the password cracker of your choice for testing the security of your own system via brute force methods. It would also be interesting to run to see if it catches any passwords you yourself are currently using.
 
 ```
 usage: lyricpass.py [-h] [--lower] [--punctuation] artist output
@@ -24,16 +35,6 @@ python lyricpass.py "Rob Zombie" zombie-pass.txt
 python lyricpass.py --lower "Stone Temple Pilots" stp.txt
 ```
 
-# Overview
-People are being encouraged to use longer passwords - specifically multiple words stringed together.
-An obvious choice is to use a song lyric from their favorite artist. This seems much more secure than a single word.
-
-The intent of this tool is a POC to prove that this type of password is also insecure, especially if you are able to
-find the target's favorite artist (easy enough to do with social media).
-
-This could be used with the password cracker of your choice for testing the security of your own system via brute force methods. It would also be interesting to run to see if it catches any passwords you yourself are currently using.
-
 # To Do
 This is just a very early POC. I still need to work on error checking. I also plan to do the following:
 - Provide function to further split lines including a comma (as this could be a logical break)
-- Fix for Python 3+ (right now tested good in Python 2.7)
