@@ -1,5 +1,11 @@
 <meta name="description" content="Password wordlist generator using song lyrics for targeted bruteforce audits / attacks. Useful for penetration testing or security research." />
 
+<div align="center">
+<h1>Moved to Gitlab!</h1>
+<i>Click the racoon dog to follow...</i></br></br>
+<a href="https://gitlab.com/initstring/lyricpass"> <img src="gl.png"></a>
+</div>
+
 **You might be more interested in my pre-compiled, pre-cleaned passphrase wordlist project [here](https://github.com/initstring/passphrase-cracker)**
 
 **Currently tested only with Python 2.7 - need to continue fixing for Python 3+**
