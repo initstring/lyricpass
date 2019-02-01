@@ -1,11 +1,9 @@
-<meta name="description" content="Password wordlist generator using song lyrics for targeted bruteforce audits / attacks. Useful for penetration testing or security research." />
-
 **You might be more interested in my pre-compiled, pre-cleaned passphrase wordlist project [here](https://github.com/initstring/passphrase-cracker)**
 
-**Currently tested only with Python 2.7 - need to continue fixing for Python 3+**
 
 # lyricpass
-Password wordlist / dictionary generator using song lyrics for targeted bruteforce audits / attacks. Useful for penetration testing or security research.<br>
+Password wordlist / dictionary generator using song lyrics for targeted bruteforce audits / attacks. Useful for penetration testing or security research.
+
 Easy to use - you give it an artist, you get back a text file with all of their lyrics to use for cracking passwords.
 
 
@@ -35,7 +33,3 @@ Examples:<Br>
 python lyricpass.py "Rob Zombie" zombie-pass.txt
 python lyricpass.py --lower "Stone Temple Pilots" stp.txt
 ```
-
-# To Do
-This is just a very early POC. I still need to work on error checking. I also plan to do the following:
-- Provide function to further split lines including a comma (as this could be a logical break)
