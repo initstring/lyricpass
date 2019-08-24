@@ -7,7 +7,7 @@ Provide a single artist or a file containing one artists per line. The tool will
 
 You can use `wordlist.txt` with something like hashcat and a good set of rules. I recommend combining it with my passphrase cracking project [available here](https://github.com/initstring/passphrase-wordlist). 
 
-# Utilization
+## Utilization
 
 ```
 usage: lyricpass.py [-h] (-a ARTIST | -i INFILE)
