@@ -43,8 +43,8 @@ def parse_args():
     args = parser.parse_args()
 
     if args.infile:
-        if not os.access(args.infile, os.R_OK):                                     
-            print("[!] Cannot access input file, exiting")                          
+        if not os.access(args.infile, os.R_OK):
+            print("[!] Cannot access input file, exiting")
             sys.exit()
 
     return args
@@ -82,7 +82,7 @@ def build_urls(artist):
     with urllib.request.urlopen(query_url) as response:
         html = response.read().decode()
 
-    song_ids = re.findall(regex, html)   
+    song_ids = re.findall(regex, html)
 
     if not_found in html:
         print("[!] Artist {} not found, skipping".format(artist))
@@ -135,7 +135,6 @@ def scrape_lyrics(url_list):
         current += 1
 
     return deduped_lyrics
-            
 
 
 def main():
