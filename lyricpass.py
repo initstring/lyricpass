@@ -20,11 +20,14 @@ passphrases.txt <cleaned passphrases>
 
 import argparse
 import urllib.request
+import datetime
 import os
 import sys
 import re
 
 SITE = "https://www.lyrics.com/"
+LYRIC_FILE = "raw-lyrics-{:%Y-%m-%d-%H.%M.%S}".format(datetime.datetime.now())
+PASS_FILE = "wordlist-{:%Y-%m-%d-%H.%M.%S}".format(datetime.datetime.now())
 
 
 def parse_args():
@@ -40,6 +43,11 @@ def parse_args():
     group.add_argument("-i", "--infile", type=str, action="store",
                        help="File containing one artist per line to scrape")
 
+    parser.add_argument("--min", type=int, default=8,
+                        help="Minimum passphrase length. Default=8")
+    parser.add_argument("--max", type=int, default=40,
+                        help="Minimum passphrase length. Default=40")
+
     args = parser.parse_args()
 
     if args.infile:
@@ -48,6 +56,57 @@ def parse_args():
             sys.exit()
 
     return args
+
+def make_phrases(line, args):
+    """
+    Cleans raw lyrics into usable passphrases
+    """
+    clean_lines = []
+    final_lines = []
+
+    # Allow only letters, numbers, spaces, and some punctuation
+    allowed_chars = re.compile("[^a-zA-Z0-9 '&]")
+
+    # Lowercase everything and deal with common punctuation
+    line = line.lower()
+    line = re.sub(r'[-_]', ' ', line)
+
+    # The following lines attempt to remove accented characters, as the
+    # tool is focused on Engligh-language passwords.
+    line = re.sub('[àáâãäå]', 'a', line)
+    line = re.sub('[èéêë]', 'e', line)
+    line = re.sub('[ìíîï]', 'i', line)
+    line = re.sub('[òóôõö]', 'o', line)
+    line = re.sub('[ùúûü]', 'u', line)
+    line = re.sub('[ñ]', 'n', line)
+
+    # Gets rid of any remaining special characters in the name
+    line = allowed_chars.sub('', line)
+
+    # Shrinks down multiple spaces
+    line = re.sub(r'\s\s+', ' ', line)
+
+     # If line has an apostrophe make a duplicate without
+    if "'" in line:
+        clean_lines.append(re.sub("'", "", line))
+
+    # Making duplicating phrases including and / &
+    if ' and ' in line:
+        clean_lines.append(re.sub(' and ', ' & ', line))
+    if '&' in line:
+        newline = re.sub('&', ' and ', line)
+        newline = re.sub(r'\s+', ' ', newline).strip()
+        clean_lines.append(newline)
+
+    # Add what is left to the list
+    clean_lines.append(line)
+
+    # Only keep items in the acceptable length
+    for item in clean_lines:
+        if args.max >= item >= args.min:
+            final_lines.append(item)
+
+    return final_lines
 
 def parse_artists(args):
     """
@@ -145,6 +204,7 @@ def main():
     artists = parse_artists(args)
 
     raw_words = set()
+    final_phrases = set()
 
     for artist in artists:
         print("[+] Looking up artist {}".format(artist))
@@ -153,11 +213,16 @@ def main():
             continue
         raw_words.update(scrape_lyrics(url_list))
 
-    # TO DO: Implement cleaning function before writing this one.
-    write_data("wordlist.txt", raw_words)
+    for lyric in raw_words:
+        phrases = make_phrases(lyric, args)
+        final_phrases.update(phrases)
 
-    print("[+] All done! Check out raw-lyrics.txt and wordlist.txt in your"
-          " current directory.")
+    write_data("wordlist.txt", final_phrases)
+
+    print("[+] All done!")
+    print("")
+    print("Raw lyrics: {}".format(LYRIC_FILE))
+    print("Passphrases: {}".format(PASS_FILE))
 
 
 
