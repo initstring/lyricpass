@@ -1,9 +1,6 @@
 #!/usr/bin/env python3
 """
-Utility to scrape lyrics from https://lyrics.wikia.com
-
-Used as a tool to generate raw input for the cleanup.py script in the password
-cracking project at github.com/initstring/passphrase-wordlist
+Utility to scrape lyrics from https://lyrics.com
 
 Usage:
 lyricspass.py -a <artist>
@@ -15,7 +12,10 @@ python lyricpass.py -i /tmp/artists.txt
 
 Outputs two files:
 raw-lyrics.txt <everything>
-passphrases.txt <cleaned passphrases>
+wordlist.txt <cleaned passphrases>
+
+Tool by initstring. If you're into cracking complex passwords, check out
+github.com/initstring/passphrase-wordlist for more fun!
 """
 
 import argparse
@@ -86,7 +86,7 @@ def make_phrases(line, args):
     # Shrinks down multiple spaces
     line = re.sub(r'\s\s+', ' ', line)
 
-     # If line has an apostrophe make a duplicate without
+    # If line has an apostrophe make a duplicate without
     if "'" in line:
         clean_lines.append(re.sub("'", "", line))
 
@@ -141,6 +141,7 @@ def build_urls(artist):
     with urllib.request.urlopen(query_url) as response:
         html = response.read().decode()
 
+    # The songs are stored by a unique ID
     song_ids = re.findall(regex, html)
 
     if not_found in html:
@@ -154,7 +155,9 @@ def build_urls(artist):
         print("[+] Found {} songs for artists {}"
               .format(len(song_ids), artist))
 
+    # The "print" URL shows us the easiest to decode version of the song
     url_list = [SITE + "print.php?id=" + id for id in song_ids]
+
     return url_list
 
 def write_data(outfile, data):
@@ -206,6 +209,10 @@ def main():
     raw_words = set()
     final_phrases = set()
 
+    # First, we grab all the lyrics for a given artist.
+    # The scrape_lyrics function will write the raw lyrics to an output
+    # file as it goes, which may come in handy if the program exits early
+    # due to an error.
     for artist in artists:
         print("[+] Looking up artist {}".format(artist))
         url_list = build_urls(artist)
@@ -213,18 +220,19 @@ def main():
             continue
         raw_words.update(scrape_lyrics(url_list))
 
+    # Now we will apply some rules to clean all the raw lyrics into a base
+    # passphrase file that can be used for cracking.
     for lyric in raw_words:
         phrases = make_phrases(lyric, args)
         final_phrases.update(phrases)
 
+    # Write out the cleaned passphrases to a file
     write_data(PASS_FILE, final_phrases)
 
     print("[+] All done!")
     print("")
     print("Raw lyrics: {}".format(LYRIC_FILE))
     print("Passphrases: {}".format(PASS_FILE))
-
-
 
 
 if __name__ == '__main__':
