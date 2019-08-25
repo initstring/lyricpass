@@ -1,35 +1,31 @@
-**You might be more interested in my pre-compiled, pre-cleaned passphrase wordlist project [here](https://github.com/initstring/passphrase-cracker)**
-
-
 # lyricpass
-Password wordlist / dictionary generator using song lyrics for targeted bruteforce audits / attacks. Useful for penetration testing or security research.
+Generate lyric-based passphrase wordlists for offline password cracking.
 
-Easy to use - you give it an artist, you get back a text file with all of their lyrics to use for cracking passwords.
+Provide a single artist or a file containing one artists per line. The tool will generate two files for you:
+- raw-lyrics.txt (all lyrics from all songs)
+- wordlist.txt (likely passphrase candidates)
 
+You can use `wordlist.txt` with something like hashcat and a good set of rules. I recommend combining it with my passphrase cracking project [available here](https://github.com/initstring/passphrase-wordlist). 
 
-# Overview
-People are being encouraged to use longer passwords - specifically multiple words stringed together.
-An obvious choice is to use a song lyric from their favorite artist. This seems much more secure than a single word.
-
-The intent of this tool is a POC to prove that this type of password is also insecure, especially if you are able to
-find the target's favorite artist (easy enough to do with social media).
-
-This could be used with the password cracker of your choice for testing the security of your own system via brute force methods. It would also be interesting to run to see if it catches any passwords you yourself are currently using.
+## Utilization
 
 ```
-usage: lyricpass.py [-h] [--lower] [--punctuation] artist output
-
-positional arguments:
-    artist:         Define a specific artist for song lyric inclusion. Use quotes.
-    output:         Output to file name in current directory.
+usage: lyricpass.py [-h] (-a ARTIST | -i INFILE)
 
 optional arguments:
-    -h, --help      show this help message and exit
-    --lower         Switches all letters to lower case.
-    --punctuation   Preserves the punctuation, which is removed by default
+  -h, --help            show this help message and exit
+  -a ARTIST, --artist ARTIST
+                        Single artist to scrape
+  -i INFILE, --infile INFILE
+                        File containing one artist per line to scrape
+  --min MIN             Minimum passphrase length. Default=8
+  --max MAX             Minimum passphrase length. Default=40
+
 ```
-Examples:<Br>
+
+Examples:
+
 ```
-python lyricpass.py "Rob Zombie" zombie-pass.txt
-python lyricpass.py --lower "Stone Temple Pilots" stp.txt
+lyricpass.py "Rob Zombie"
+lyricpass.py /tmp/my-fav-artists.txt
 ```
