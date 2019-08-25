@@ -103,7 +103,7 @@ def make_phrases(line, args):
 
     # Only keep items in the acceptable length
     for item in clean_lines:
-        if args.max >= item >= args.min:
+        if args.max >= len(item) >= args.min:
             final_lines.append(item)
 
     return final_lines
@@ -187,7 +187,7 @@ def scrape_lyrics(url_list):
         lyrics = re.findall(regex, html)[0]
         lyrics = re.split(newline, lyrics)
 
-        write_data('raw-lyrics.txt', lyrics)
+        write_data(LYRIC_FILE, lyrics)
 
         deduped_lyrics.update(lyrics)
 
@@ -217,7 +217,7 @@ def main():
         phrases = make_phrases(lyric, args)
         final_phrases.update(phrases)
 
-    write_data("wordlist.txt", final_phrases)
+    write_data(PASS_FILE, final_phrases)
 
     print("[+] All done!")
     print("")
