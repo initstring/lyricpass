@@ -18,6 +18,8 @@ optional arguments:
                         Single artist to scrape
   -i INFILE, --infile INFILE
                         File containing one artist per line to scrape
+  --min MIN             Minimum passphrase length. Default=8
+  --max MAX             Minimum passphrase length. Default=40
 
 ```
 
