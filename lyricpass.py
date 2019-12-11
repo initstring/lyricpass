@@ -156,7 +156,7 @@ def build_urls(artist):
               .format(len(song_ids), artist))
 
     # The "print" URL shows us the easiest to decode version of the song
-    url_list = [SITE + "print.php?id=" + id for id in song_ids]
+    url_list = [SITE + "db-print.php?id=" + id for id in song_ids]
 
     return url_list
 
