@@ -26,6 +26,6 @@ optional arguments:
 Examples:
 
 ```
-lyricpass.py "Rob Zombie"
-lyricpass.py /tmp/my-fav-artists.txt
+lyricpass.py -a "Rob Zombie"
+lyricpass.py -i /tmp/my-fav-artists.txt
 ```
