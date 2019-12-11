@@ -187,8 +187,14 @@ def scrape_lyrics(url_list):
         with urllib.request.urlopen(url) as response:
             html = response.read().decode()
 
-        lyrics = re.findall(regex, html)[0]
-        lyrics = re.split(newline, lyrics)
+        lyrics = re.findall(regex, html)
+
+        # We should always have a match... but if not, skip this url
+        if not lyrics:
+            print("\n[!] Found no lyrics at {}".format(url))
+            continue
+
+        lyrics = re.split(newline, lyrics[0])
 
         write_data(LYRIC_FILE, lyrics)
 
