@@ -9,6 +9,8 @@ You can use `wordlist.txt` with something like hashcat and a good set of rules. 
 
 ## Utilization
 
+First, install the requests library with `pip3 install -r requirements.txt`
+
 ```
 usage: lyricpass.py [-h] (-a ARTIST | -i INFILE)
 
