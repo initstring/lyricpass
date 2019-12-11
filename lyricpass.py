@@ -19,7 +19,7 @@ github.com/initstring/passphrase-wordlist for more fun!
 """
 
 import argparse
-import urllib.request
+import requests
 import datetime
 import os
 import sys
@@ -138,8 +138,8 @@ def build_urls(artist):
     song_ids = []
     regex = re.compile(r'href="/lyric/(.*?)/')
 
-    with urllib.request.urlopen(query_url) as response:
-        html = response.read().decode()
+    response = requests.get(query_url)
+    html = response.text
 
     # The songs are stored by a unique ID
     song_ids = re.findall(regex, html)
@@ -184,8 +184,8 @@ def scrape_lyrics(url_list):
     for url in url_list:
         print("Checking song {}/{}...       \r".format(current, total), end="")
 
-        with urllib.request.urlopen(url) as response:
-            html = response.read().decode()
+        response = requests.get(url)
+        html = response.text
 
         lyrics = re.findall(regex, html)
 
