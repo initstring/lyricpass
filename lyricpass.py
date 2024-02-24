@@ -28,6 +28,7 @@ import re
 SITE = "https://www.lyrics.com/"
 LYRIC_FILE = "raw-lyrics-{:%Y-%m-%d-%H.%M.%S}".format(datetime.datetime.now())
 PASS_FILE = "wordlist-{:%Y-%m-%d-%H.%M.%S}".format(datetime.datetime.now())
+HEADER = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:109.0) Gecko/20100101 Firefox/119.0"}
 
 
 def parse_args():
@@ -138,7 +139,8 @@ def build_urls(artist):
     song_ids = []
     regex = re.compile(r'href="/lyric/(.*?)/')
 
-    with urllib.request.urlopen(query_url) as response:
+    req = urllib.request.Request(query_url, headers=HEADER)
+    with urllib.request.urlopen(req) as response:
         html = response.read().decode()
 
     # The songs are stored by a unique ID
@@ -184,7 +186,8 @@ def scrape_lyrics(url_list):
     for url in url_list:
         print("Checking song {}/{}...       \r".format(current, total), end="")
 
-        with urllib.request.urlopen(url) as response:
+        req = urllib.request.Request(url, headers=HEADER)
+        with urllib.request.urlopen(req) as response:
             html = response.read().decode()
 
         lyrics = re.findall(regex, html)
